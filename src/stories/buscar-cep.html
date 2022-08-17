@@ -1,8 +1,9 @@
-<input
-type="text"
-(input)="buscaCep($event)"
->
+<a router-Link="/buscaCep">BuscarCep</a>
 
-<div>
-        [(ngModel)]="cepRetorno"
-</div>
+<input type="text" (input)="buscaCep($event)" />
+
+<div>[(ngModel)]="cepRetorno"</div>
+
+<h2>Teste</h2>
+
+<router-outlet></router-outlet>

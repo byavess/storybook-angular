@@ -1,4 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+
 import { BuscarCepService, Cep } from 'src/app/buscar-cep.service';
 
 @Component({
@@ -6,28 +8,28 @@ import { BuscarCepService, Cep } from 'src/app/buscar-cep.service';
   templateUrl: './buscar-cep.html',
   styles: [
     `
-    :host {
-      text-align: center;
-      background: white;
-      display: block;
-      padding: .45rem .65rem;
-      border-radius: 3px;
-      max-width: 325px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    }
-h2 {
-  color: #c85f7f;
-}
+      :host {
+        text-align: center;
+        background: white;
+        display: block;
+        padding: 0.45rem 0.65rem;
+        border-radius: 3px;
+        max-width: 325px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      }
+      h2 {
+        color: #c85f7f;
+      }
 
-p {
-  text-align: center;
-}  `
-  ]
+      p {
+        text-align: center;
+      }
+    `,
+  ],
 })
 export default class BuscarCepComponent {
-
-    cepRetorno?: Cep
-    /**
+  cepRetorno?: Cep;
+  /**
    * Is this the principal call to action on the page?
    */
   @Input('cep') cep: any;
@@ -35,13 +37,16 @@ export default class BuscarCepComponent {
   @Input('content') content = '😄';
   @Output() btnClicked = new EventEmitter<boolean>();
 
-  constructor(private buscarCepService: BuscarCepService){}
+  constructor(
+    private buscarCepService: BuscarCepService,
+    private routerModule: RouterModule,
+    private route: ActivatedRoute,
+    private roter: Router
+  ) {}
 
-  buscaCep(cep: any){
-    this.buscarCepService.buscarCep(cep).subscribe(
-        resp => {
-            this.cepRetorno = resp
-        }
-    )
+  buscaCep(cep: any) {
+    this.buscarCepService.buscarCep(cep).subscribe((resp) => {
+      this.cepRetorno = resp;
+    });
   }
 }
